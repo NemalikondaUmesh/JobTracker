@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobTracker | Manage Jobs</title>
+
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/jobs.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="brand">
+        <div class="brand-icon">J</div>
+        <div>
+            <h1>JobTracker</h1>
+            <p>Career Management Platform</p>
+        </div>
+    </div>
+    <a href="index.html" class="back-link">← Dashboard</a>
+</header>
+
+<main class="container">
+
+    <section class="welcome">
+        <div>
+            <h2>Manage Jobs</h2>
+            <p>Add, view, update and delete job opportunities.</p>
+        </div>
+    </section>
+
+    <!-- Add Job Form -->
+    <section class="job-form-section">
+        <h3 id="formTitle">Add New Job</h3>
+
+        <form id="jobForm">
+            <input type="hidden" id="jobId">
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="title">Job Title</label>
+                    <input type="text" id="title" placeholder="Java Developer" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" placeholder="Company Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="Hyderabad" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobType">Job Type</label>
+                    <select id="jobType" required>
+                        <option value="">Select Job Type</option>
+                        <option value="Full-Time">Full-Time</option>
+                        <option value="Part-Time">Part-Time</option>
+                        <option value="Internship">Internship</option>
+                        <option value="Remote">Remote</option>
+                        <option value="Contract">Contract</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="salary">Salary</label>
+                    <input type="text" id="salary" placeholder="3-5 LPA" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="skills">Required Skills</label>
+                    <input type="text" id="skills"
+                           placeholder="Java, Spring Boot, SQL" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="description">Job Description</label>
+                    <textarea id="description" rows="4"
+                              placeholder="Enter job description..." required></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" id="submitBtn" class="primary-btn">
+                    Add Job
+                </button>
+
+                <button type="button" id="cancelBtn"
+                        class="secondary-btn" hidden>
+                    Cancel Edit
+                </button>
+            </div>
+        </form>
+
+        <p id="formMessage" class="form-message"></p>
+    </section>
+
+    <!-- Jobs List -->
+    <section class="jobs-list-section">
+        <div class="list-heading">
+            <div>
+                <h3>All Jobs</h3>
+                <p>View and manage available job records.</p>
+            </div>
+
+            <button type="button" onclick="loadJobs()" class="refresh-btn">
+                ↻ Refresh
+            </button>
+        </div>
+
+        <div class="jobs-search-container">
+            <span class="search-icon">⌕</span>
+            <input type="search" id="searchInput"
+                   placeholder="Search by job title, company or location..."
+                   autocomplete="off">
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Job Title</th>
+                        <th>Company</th>
+                        <th>Location</th>
+                        <th>Job Type</th>
+                        <th>Salary</th>
+                        <th>Skills</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="jobsTableBody">
+                    <tr>
+                        <td colspan="8">Loading jobs...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Apply for Job Popup -->
+    <div id="applyModal" class="apply-modal" hidden>
+        <div class="apply-modal-content">
+            <button type="button" class="modal-close"
+                    id="closeApplyModal" aria-label="Close">
+                &times;
+            </button>
+
+            <h3>Apply for Job</h3>
+            <p id="applyJobDetails" class="apply-job-details"></p>
+
+            <form id="applyForm">
+                <input type="hidden" id="applyJobId">
+
+                <div class="form-group">
+                    <label for="candidateSelect">Select Candidate</label>
+                    <select id="candidateSelect" required>
+                        <option value="">Loading candidates...</option>
+                    </select>
+                </div>
+
+                <p id="applyMessage" class="apply-message"></p>
+
+                <div class="apply-modal-actions">
+                    <button type="submit" id="applySubmitBtn"
+                            class="primary-btn">
+                        Submit Application
+                    </button>
+
+                    <button type="button" id="cancelApplyBtn"
+                            class="secondary-btn">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>JobTracker © 2026 | Job Management</p>
+    </footer>
+
+</main>
+
+<script src="./Js/jobs.js"></script>
+</body>
+</html>

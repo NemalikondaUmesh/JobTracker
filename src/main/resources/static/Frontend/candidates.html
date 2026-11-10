@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobTracker | Manage Candidates</title>
+
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/candidates.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">J</div>
+            <div>
+                <h1>JobTracker</h1>
+                <p>Career Management Platform</p>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">← Dashboard</a>
+    </header>
+
+    <main class="container">
+
+        <!-- Welcome Section -->
+        <section class="welcome">
+            <h2>Manage Candidates</h2>
+            <p>Register, view, update and manage candidate records.</p>
+        </section>
+
+        <!-- Candidate Registration Form -->
+        <section class="candidate-form-section">
+
+            <h3 id="formTitle">Register New Candidate</h3>
+
+            <form id="candidateForm">
+
+                <input type="hidden" id="candidateId">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="name">Candidate Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter candidate name"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter email address"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input
+                            type="text"
+                            id="phone"
+                            placeholder="Enter phone number"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skills">Skills</label>
+                        <input
+                            type="text"
+                            id="skills"
+                            placeholder="Java, Spring Boot, SQL"
+                            required>
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        id="submitBtn"
+                        class="primary-btn">
+                        Register Candidate
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancelBtn"
+                        class="secondary-btn"
+                        hidden>
+                        Cancel Edit
+                    </button>
+
+                </div>
+
+            </form>
+
+            <p id="formMessage" class="form-message"></p>
+
+        </section>
+
+        <!-- Candidates List -->
+        <section class="candidates-list-section">
+
+            <div class="list-heading">
+
+                <div>
+                    <h3>All Candidates</h3>
+                    <p>View and manage registered candidates.</p>
+                </div>
+
+                <button
+                    type="button"
+                    onclick="loadCandidates()"
+                    class="refresh-btn">
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+            <!-- Search -->
+            <div class="candidate-search">
+
+                <span class="search-icon">⌕</span>
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search by candidate name or email..."
+                    autocomplete="off">
+
+            </div>
+
+            <!-- Candidates Table -->
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Skills</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="candidatesTableBody">
+                        <tr>
+                            <td colspan="6">Loading candidates...</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>JobTracker © 2026 | Candidate Management</p>
+        </footer>
+
+    </main>
+
+    <script src="./Js/candidates.js"></script>
+
+</body>
+</html>

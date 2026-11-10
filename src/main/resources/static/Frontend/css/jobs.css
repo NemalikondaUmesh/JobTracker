@@ -1,0 +1,564 @@
+
+/* ==========================================
+   JOBTRACKER - MANAGE JOBS PAGE
+   Compact White, Slate & Purple Theme
+========================================== */
+
+/* Page Layout */
+.container {
+    width: 92%;
+    max-width: 1400px;
+    margin: 25px auto;
+}
+
+/* ==========================================
+   WELCOME SECTION
+========================================== */
+
+.welcome {
+    margin-bottom: 18px;
+}
+
+.welcome h2 {
+    color: #252b3b;
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.welcome p {
+    color: #858b9c;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* ==========================================
+   JOB FORM SECTION
+========================================== */
+
+.job-form-section {
+    background: #ffffff;
+    padding: 20px 22px;
+    border: 1px solid #e9eaf0;
+    border-radius: 10px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 8px rgba(30, 35, 60, 0.035);
+}
+
+.job-form-section h3 {
+    color: #292e40;
+    font-size: 17px;
+    font-weight: 650;
+    margin: 0 0 16px;
+}
+
+/* Form Grid */
+.job-form-section .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px 18px;
+}
+
+/* Form Groups */
+.job-form-section .form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.job-form-section .form-group label {
+    color: #42495b;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+/* Input Fields */
+.job-form-section .form-group input,
+.job-form-section .form-group select,
+.job-form-section .form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 9px 11px;
+
+    background: #ffffff;
+    border: 1px solid #e0e3eb;
+    border-radius: 6px;
+
+    color: #303548;
+    font-size: 13px;
+    font-family: inherit;
+
+    outline: none;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.job-form-section .form-group input,
+.job-form-section .form-group select {
+    height: 38px;
+}
+
+.job-form-section .form-group textarea {
+    min-height: 75px;
+    resize: vertical;
+}
+
+/* Input Focus */
+.job-form-section .form-group input:focus,
+.job-form-section .form-group select:focus,
+.job-form-section .form-group textarea:focus {
+    border-color: #7667d9;
+    box-shadow: 0 0 0 3px rgba(118, 103, 217, 0.09);
+}
+
+/* Full Width Field */
+.job-form-section .form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* ==========================================
+   FORM BUTTONS
+========================================== */
+
+.job-form-section .form-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.job-form-section .primary-btn,
+.job-form-section .secondary-btn {
+    padding: 9px 18px;
+    border: none;
+    border-radius: 6px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.job-form-section .primary-btn {
+    background: #6859ca;
+    color: #ffffff;
+}
+
+.job-form-section .primary-btn:hover {
+    background: #5546b5;
+}
+
+.job-form-section .secondary-btn {
+    background: #f0eff7;
+    color: #555b70;
+    border: 1px solid #e4e2ed;
+}
+
+.job-form-section .secondary-btn:hover {
+    background: #e5e3ef;
+}
+
+/* Form Message */
+.form-message {
+    margin: 10px 0 0;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* ==========================================
+   JOB LIST SECTION
+========================================== */
+
+.jobs-list-section {
+    background: #ffffff;
+    padding: 20px 22px;
+    border: 1px solid #e9eaf0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(30, 35, 60, 0.035);
+}
+
+/* List Heading */
+.jobs-list-section .list-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+
+.jobs-list-section .list-heading h3 {
+    color: #292e40;
+    font-size: 17px;
+    margin: 0 0 4px;
+}
+
+.jobs-list-section .list-heading p {
+    color: #858b9c;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* ==========================================
+   SEARCH BAR
+========================================== */
+
+.jobs-search-container {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    width: 320px;
+    max-width: 100%;
+    height: 38px;
+
+    margin: 14px 0;
+    padding: 0 12px;
+
+    background: #ffffff;
+    border: 1px solid #e2e5ec;
+    border-radius: 7px;
+
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.jobs-search-container:focus-within {
+    border-color: #7465d8;
+    box-shadow: 0 0 0 2px rgba(116, 101, 216, 0.08);
+}
+
+.search-icon {
+    color: #858ba0;
+    font-size: 19px;
+    line-height: 1;
+}
+
+.jobs-search-container input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+
+    color: #303548;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+.jobs-search-container input::placeholder {
+    color: #a0a5b3;
+}
+
+/* ==========================================
+   REFRESH BUTTON
+========================================== */
+
+.jobs-list-section .refresh-btn {
+    padding: 8px 13px;
+
+    background: #f1efff;
+    color: #6555c5;
+
+    border: 1px solid #e5e0ff;
+    border-radius: 6px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.jobs-list-section .refresh-btn:hover {
+    background: #e8e4ff;
+    border-color: #d4ccff;
+}
+
+/* ==========================================
+   JOBS TABLE
+========================================== */
+
+.jobs-list-section .table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e9eaf0;
+    border-radius: 8px;
+}
+
+.jobs-list-section table {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+.jobs-list-section thead {
+    background: #f6f5fb;
+}
+
+.jobs-list-section th {
+    padding: 12px 13px;
+
+    color: #51576b;
+    font-size: 12px;
+    font-weight: 650;
+    text-align: left;
+
+    border-bottom: 1px solid #e9eaf0;
+    white-space: nowrap;
+}
+
+.jobs-list-section td {
+    padding: 12px 13px;
+
+    color: #50576a;
+    font-size: 12px;
+
+    border-bottom: 1px solid #f0f1f5;
+    vertical-align: middle;
+}
+
+.jobs-list-section tbody tr:hover {
+    background: #fafaff;
+}
+
+.jobs-list-section tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ==========================================
+   TABLE ACTION BUTTONS
+========================================== */
+
+.jobs-list-section td button {
+    padding: 6px 10px;
+    margin-right: 5px;
+
+    border: none;
+    border-radius: 5px;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.jobs-list-section td button:hover {
+    transform: translateY(-1px);
+}
+
+/* Edit Button */
+.jobs-list-section td button:first-child {
+    background: #eeedff;
+    color: #6254c5;
+}
+
+.jobs-list-section td button:first-child:hover {
+    background: #dedbff;
+}
+
+/* Delete Button */
+.jobs-list-section td button:last-child {
+    background: #fff0f0;
+    color: #dc5353;
+}
+
+.jobs-list-section td button:last-child:hover {
+    background: #ffe0e0;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer {
+    padding: 18px 0;
+    text-align: center;
+}
+
+footer p {
+    color: #969bab;
+    font-size: 12px;
+    margin: 0;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 768px) {
+
+    .container {
+        width: 95%;
+    }
+
+    .job-form-section,
+    .jobs-list-section {
+        padding: 16px;
+    }
+
+    .job-form-section .form-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .job-form-section .form-group.full-width {
+        grid-column: auto;
+    }
+
+    .jobs-list-section .list-heading {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .welcome h2 {
+        font-size: 20px;
+    }
+
+    .jobs-search-container {
+        width: 100%;
+    }
+
+    .jobs-list-section .list-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .job-form-section .form-actions {
+        flex-wrap: wrap;
+    }
+}
+
+/* Apply Button */
+.apply-btn {
+    background: #16a36a;
+    color: #fff;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 4px;
+    font-size: 12px;
+}
+
+.apply-btn:hover {
+    background: #128454;
+}
+
+/* Application Popup */
+.apply-modal[hidden] {
+    display: none !important;
+}
+
+.apply-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.apply-modal-content {
+    background: #fff;
+    width: 100%;
+    max-width: 430px;
+    padding: 25px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
+}
+
+.apply-modal-content h3 {
+    margin: 0 0 8px;
+    color: #1e293b;
+}
+
+.apply-job-details {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    font-size: 25px;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.apply-modal-content .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.apply-modal-content label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.apply-modal-content select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 14px;
+}
+
+.apply-modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+
+.apply-modal-actions button {
+    cursor: pointer;
+}
+
+.apply-modal-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.apply-message {
+    font-size: 13px;
+    margin: 12px 0 0;
+}
+
+.apply-message.success {
+    color: #16a36a;
+}
+
+.apply-message.error {
+    color: #dc3545;
+}
+
+@media (max-width: 480px) {
+    .apply-modal-content {
+        padding: 20px;
+    }
+
+    .apply-modal-actions {
+        flex-direction: column;
+    }
+}
+

@@ -1,0 +1,421 @@
+
+/* ==========================================
+   JOBTRACKER - CANDIDATES PAGE
+   Compact White, Slate & Purple Theme
+========================================== */
+
+/* Main Layout */
+.container {
+    width: 92%;
+    max-width: 1400px;
+    margin: 25px auto;
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   WELCOME SECTION
+========================================== */
+
+.welcome {
+    margin-bottom: 18px;
+}
+
+.welcome h2 {
+    color: #252b3b;
+    font-size: 23px;
+    font-weight: 700;
+    margin: 0 0 5px;
+}
+
+.welcome p {
+    color: #858b9c;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* ==========================================
+   CANDIDATE FORM
+========================================== */
+
+.candidate-form-section {
+    background: #ffffff;
+    padding: 20px 22px;
+    border: 1px solid #e9eaf0;
+    border-radius: 10px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 8px rgba(30, 35, 60, 0.035);
+    box-sizing: border-box;
+}
+
+.candidate-form-section h3 {
+    color: #292e40;
+    font-size: 17px;
+    font-weight: 650;
+    margin: 0 0 16px;
+}
+
+/* Form Grid */
+#candidateForm .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px 18px;
+}
+
+/* Form Groups */
+#candidateForm .form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+#candidateForm .form-group label {
+    color: #42495b;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+/* Form Inputs */
+#candidateForm .form-group input {
+    width: 100%;
+    height: 38px;
+    padding: 9px 11px;
+    box-sizing: border-box;
+
+    background: #ffffff;
+    border: 1px solid #e0e3eb;
+    border-radius: 6px;
+
+    color: #303548;
+    font-size: 13px;
+    font-family: inherit;
+
+    outline: none;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+#candidateForm .form-group input::placeholder {
+    color: #a0a5b3;
+}
+
+#candidateForm .form-group input:focus {
+    border-color: #7667d9;
+    box-shadow: 0 0 0 3px rgba(118, 103, 217, 0.09);
+}
+
+/* ==========================================
+   FORM BUTTONS
+========================================== */
+
+#candidateForm .form-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#candidateForm .primary-btn,
+#candidateForm .secondary-btn {
+    padding: 9px 17px;
+    border: none;
+    border-radius: 6px;
+
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#candidateForm .primary-btn {
+    background: #6859ca;
+    color: #ffffff;
+}
+
+#candidateForm .primary-btn:hover {
+    background: #5546b5;
+}
+
+#candidateForm .secondary-btn {
+    background: #f0eff7;
+    color: #555b70;
+    border: 1px solid #e4e2ed;
+}
+
+#candidateForm .secondary-btn:hover {
+    background: #e5e3ef;
+}
+
+/* Form Message */
+.candidate-form-section .form-message {
+    margin: 10px 0 0;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* ==========================================
+   CANDIDATES LIST
+========================================== */
+
+.candidates-list-section {
+    background: #ffffff;
+    padding: 20px 22px;
+    border: 1px solid #e9eaf0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(30, 35, 60, 0.035);
+    box-sizing: border-box;
+}
+
+/* List Heading */
+.candidates-list-section .list-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+
+.candidates-list-section .list-heading h3 {
+    color: #292e40;
+    font-size: 17px;
+    margin: 0 0 4px;
+}
+
+.candidates-list-section .list-heading p {
+    color: #858b9c;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* ==========================================
+   CANDIDATE SEARCH
+========================================== */
+
+.candidate-search {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    width: 340px;
+    max-width: 100%;
+    height: 38px;
+
+    margin: 14px 0;
+    padding: 0 12px;
+
+    background: #ffffff;
+    border: 1px solid #e2e5ec;
+    border-radius: 7px;
+
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.candidate-search:focus-within {
+    border-color: #7465d8;
+    box-shadow: 0 0 0 2px rgba(116, 101, 216, 0.08);
+}
+
+.candidate-search .search-icon {
+    color: #858ba0;
+    font-size: 19px;
+    line-height: 1;
+}
+
+.candidate-search input {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+
+    color: #303548;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+.candidate-search input::placeholder {
+    color: #a0a5b3;
+}
+
+/* ==========================================
+   REFRESH BUTTON
+========================================== */
+
+.candidates-list-section .refresh-btn {
+    padding: 8px 13px;
+
+    background: #f1efff;
+    color: #6555c5;
+
+    border: 1px solid #e5e0ff;
+    border-radius: 6px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.candidates-list-section .refresh-btn:hover {
+    background: #e8e4ff;
+    border-color: #d4ccff;
+}
+
+/* ==========================================
+   CANDIDATES TABLE
+========================================== */
+
+.candidates-list-section .table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e9eaf0;
+    border-radius: 8px;
+}
+
+.candidates-list-section table {
+    width: 100%;
+    min-width: 750px;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+.candidates-list-section thead {
+    background: #f6f5fb;
+}
+
+.candidates-list-section th {
+    padding: 12px 13px;
+
+    color: #51576b;
+    font-size: 12px;
+    font-weight: 650;
+    text-align: left;
+
+    border-bottom: 1px solid #e9eaf0;
+    white-space: nowrap;
+}
+
+.candidates-list-section td {
+    padding: 12px 13px;
+
+    color: #50576a;
+    font-size: 12px;
+
+    border-bottom: 1px solid #f0f1f5;
+    vertical-align: middle;
+}
+
+.candidates-list-section tbody tr:hover {
+    background: #fafaff;
+}
+
+.candidates-list-section tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ==========================================
+   EDIT AND DELETE BUTTONS
+========================================== */
+
+.candidates-list-section .edit-btn,
+.candidates-list-section .delete-btn {
+    padding: 6px 10px;
+    margin-right: 5px;
+
+    border: none;
+    border-radius: 5px;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.candidates-list-section .edit-btn {
+    background: #eeedff;
+    color: #6254c5;
+}
+
+.candidates-list-section .edit-btn:hover {
+    background: #dedbff;
+    transform: translateY(-1px);
+}
+
+.candidates-list-section .delete-btn {
+    background: #fff0f0;
+    color: #dc5353;
+}
+
+.candidates-list-section .delete-btn:hover {
+    background: #ffe0e0;
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer {
+    padding: 18px 0;
+    text-align: center;
+}
+
+footer p {
+    color: #969bab;
+    font-size: 12px;
+    margin: 0;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 768px) {
+
+    .container {
+        width: 95%;
+    }
+
+    .candidate-form-section,
+    .candidates-list-section {
+        padding: 16px;
+    }
+
+    #candidateForm .form-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .candidates-list-section .list-heading {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .welcome h2 {
+        font-size: 20px;
+    }
+
+    .candidates-list-section .list-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .candidate-search {
+        width: 100%;
+    }
+
+    #candidateForm .form-actions {
+        flex-wrap: wrap;
+    }
+}

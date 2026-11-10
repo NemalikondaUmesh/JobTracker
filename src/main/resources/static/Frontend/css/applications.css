@@ -1,0 +1,286 @@
+
+/* ==========================================
+   JOBTRACKER - APPLICATIONS PAGE
+   Compact White, Slate & Purple Theme
+========================================== */
+
+/* Main Layout */
+
+.container {
+    width: 92%;
+    max-width: 1400px;
+    margin: 25px auto;
+    box-sizing: border-box;
+}
+
+.page-heading {
+    margin-bottom: 20px;
+}
+
+.page-heading h1 {
+    color: #252b3b;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 5px;
+}
+
+.page-heading p {
+    color: #858b9c;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* Applications Section */
+
+.applications-list-section {
+    background: #ffffff;
+    padding: 20px 22px;
+    border: 1px solid #e9eaf0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(30, 35, 60, 0.035);
+    box-sizing: border-box;
+}
+
+/* Section Header */
+
+.applications-list-section .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.applications-list-section .section-header h2 {
+    color: #292e40;
+    font-size: 17px;
+    font-weight: 650;
+    margin: 0 0 4px;
+}
+
+.applications-list-section .section-header p {
+    color: #858b9c;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* Refresh Button */
+
+.applications-list-section .refresh-btn {
+    padding: 8px 13px;
+    background: #f1efff;
+    color: #6555c5;
+    border: 1px solid #e5e0ff;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+    white-space: nowrap;
+}
+
+.applications-list-section .refresh-btn:hover {
+    background: #e8e4ff;
+    border-color: #d4ccff;
+}
+
+/* Search Box */
+
+.applications-list-section .search-box {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 360px;
+    max-width: 100%;
+    height: 38px;
+    margin: 12px 0 16px;
+    padding: 0 12px;
+    background: #ffffff;
+    border: 1px solid #e2e5ec;
+    border-radius: 7px;
+    box-sizing: border-box;
+    transition: 0.2s ease;
+}
+
+.applications-list-section .search-box:focus-within {
+    border-color: #7465d8;
+    box-shadow: 0 0 0 2px rgba(116, 101, 216, 0.08);
+}
+
+.applications-list-section .search-icon {
+    color: #858ba0;
+    font-size: 19px;
+    line-height: 1;
+}
+
+.applications-list-section .search-box input {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #303548;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+.applications-list-section .search-box input::placeholder {
+    color: #a0a5b3;
+}
+
+/* Table Container */
+
+.applications-list-section .table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e9eaf0;
+    border-radius: 8px;
+}
+
+.applications-list-section table {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+/* Table Header */
+
+.applications-list-section thead {
+    background: #f6f5fb;
+}
+
+.applications-list-section th {
+    padding: 13px;
+    color: #51576b;
+    font-size: 12px;
+    font-weight: 650;
+    text-align: left;
+    border-bottom: 1px solid #e9eaf0;
+    white-space: nowrap;
+}
+
+/* Table Body */
+
+.applications-list-section td {
+    padding: 12px 13px;
+    color: #50576a;
+    font-size: 12px;
+    border-bottom: 1px solid #f0f1f5;
+    vertical-align: middle;
+}
+
+.applications-list-section tbody tr:hover {
+    background: #fafaff;
+}
+
+.applications-list-section tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Status Select */
+
+.applications-list-section .status-select {
+    min-width: 125px;
+    padding: 7px 9px;
+    background: #ffffff;
+    color: #444b60;
+    border: 1px solid #e0e3eb;
+    border-radius: 5px;
+    font-size: 12px;
+    font-family: inherit;
+    outline: none;
+    cursor: pointer;
+}
+
+.applications-list-section .status-select:focus {
+    border-color: #7465d8;
+    box-shadow: 0 0 0 2px rgba(116, 101, 216, 0.08);
+}
+
+/* Update and Delete Buttons */
+
+.applications-list-section .update-btn,
+.applications-list-section .delete-btn {
+    padding: 7px 11px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+    white-space: nowrap;
+}
+
+.applications-list-section .update-btn {
+    background: #eeedff;
+    color: #6254c5;
+}
+
+.applications-list-section .update-btn:hover {
+    background: #dedbff;
+    transform: translateY(-1px);
+}
+
+.applications-list-section .delete-btn {
+    background: #fff0f0;
+    color: #dc5353;
+}
+
+.applications-list-section .delete-btn:hover {
+    background: #ffe0e0;
+    transform: translateY(-1px);
+}
+
+/* Footer */
+
+footer {
+    padding: 18px 0;
+    text-align: center;
+}
+
+footer p {
+    color: #969bab;
+    font-size: 12px;
+    margin: 0;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+
+    .container {
+        width: 95%;
+    }
+
+    .applications-list-section {
+        padding: 16px;
+    }
+
+    .applications-list-section .section-header {
+        flex-wrap: wrap;
+    }
+
+    .applications-list-section .search-box {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .page-heading h1 {
+        font-size: 20px;
+    }
+
+    .applications-list-section .section-header {
+        align-items: flex-start;
+    }
+
+    .applications-list-section .refresh-btn {
+        padding: 7px 10px;
+    }
+}
