@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,17 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="JobTracker Career Management Dashboard">
+
     <title>JobTracker | Dashboard</title>
 
-    <link rel="stylesheet" href="CSS/style.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
     <!-- Header -->
     <header class="header">
+
         <div class="brand">
             <div class="brand-icon">J</div>
+
             <div>
                 <h1>JobTracker</h1>
                 <p>Career Management Platform</p>
@@ -27,12 +31,14 @@
             <span class="status-dot"></span>
             <span>Backend Connected</span>
         </div>
+
     </header>
 
     <main class="container">
 
         <!-- Welcome Section -->
         <section class="welcome">
+
             <div>
                 <h2>Dashboard Overview</h2>
                 <p>Manage your jobs, candidates and applications in one place.</p>
@@ -45,12 +51,14 @@
                     ↻ Refresh Dashboard
                 </button>
             </div>
+
         </section>
 
         <!-- Main Statistics -->
         <section class="dashboard">
 
             <div class="card jobs-card">
+
                 <div class="card-top">
                     <div class="card-icon">💼</div>
                     <span class="card-label">JOB MANAGEMENT</span>
@@ -59,9 +67,11 @@
                 <h3>Total Jobs</h3>
                 <p class="count" id="totalJobs">0</p>
                 <span class="card-footer">Available job records</span>
+
             </div>
 
             <div class="card candidates-card">
+
                 <div class="card-top">
                     <div class="card-icon">👥</div>
                     <span class="card-label">CANDIDATE MANAGEMENT</span>
@@ -70,9 +80,11 @@
                 <h3>Total Candidates</h3>
                 <p class="count" id="totalCandidates">0</p>
                 <span class="card-footer">Registered candidates</span>
+
             </div>
 
             <div class="card applications-card">
+
                 <div class="card-top">
                     <div class="card-icon">📋</div>
                     <span class="card-label">APPLICATION TRACKING</span>
@@ -81,6 +93,7 @@
                 <h3>Total Applications</h3>
                 <p class="count" id="totalApplications">0</p>
                 <span class="card-footer">Submitted applications</span>
+
             </div>
 
         </section>
@@ -126,102 +139,6 @@
                 </div>
 
             </div>
-        </section>
-
-        <!-- Management Navigation -->
-        <section class="management-section">
-
-            <div class="section-heading">
-                <h2>Management</h2>
-                <p>Choose a section to manage your records.</p>
-            </div>
-
-            <div class="management-grid">
-
-                <a href="jobs.html" class="management-card">
-                    <span class="management-icon">💼</span>
-
-                    <div>
-                        <h3>Manage Jobs</h3>
-                        <p>Add, view, update and delete jobs.</p>
-                    </div>
-
-                    <span class="arrow">→</span>
-                </a>
-
-                <a href="candidates.html" class="management-card">
-                    <span class="management-icon">👥</span>
-
-                    <div>
-                        <h3>Manage Candidates</h3>
-                        <p>Register and manage candidate details.</p>
-                    </div>
-
-                    <span class="arrow">→</span>
-                </a>
-
-                <a href="applications.html" class="management-card">
-                    <span class="management-icon">📋</span>
-
-                    <div>
-                        <h3>Manage Applications</h3>
-                        <p>Track applications and update their status.</p>
-                    </div>
-
-                    <span class="arrow">→</span>
-                </a>
-
-            </div>
-        </section>
-
-        <!-- Recent Applications -->
-        <section class="management-section">
-
-            <div class="section-heading">
-                <h2>Recent Applications</h2>
-                <p>Latest candidate job applications.</p>
-            </div>
-
-            <div class="table-container">
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Candidate</th>
-                            <th>Job</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="recentApplicationsBody">
-                        <tr>
-                            <td colspan="4">Loading applications...</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-
-            <p class="view-all">
-                <a href="applications.html">
-                    View All Applications →
-                </a>
-            </p>
 
         </section>
 
-        <!-- Footer -->
-        <footer>
-            <p>
-                JobTracker © 2026 |
-                Built with HTML, CSS, JavaScript & Spring Boot
-            </p>
-        </footer>
-
-    </main>
-
-    <script src="Js/script.js"></script>
-
-</body>
-</html>
