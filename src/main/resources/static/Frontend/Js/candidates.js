@@ -3,7 +3,7 @@
 // JOBTRACKER - CANDIDATES MANAGEMENT
 // ==========================================
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "https://jobtracker-1-h1y6.onrender.com";
 
 // DOM Elements
 const candidateForm = document.getElementById("candidateForm");

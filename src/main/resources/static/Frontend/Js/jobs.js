@@ -1,6 +1,6 @@
 
 // API Base URL
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "https://jobtracker-1-h1y6.onrender.com";
 
 // HTML Elements
 const jobForm = document.getElementById("jobForm");
