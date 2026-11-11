@@ -1,5 +1,12 @@
 
-const API_BASE_URL = "https://jobtracker-1-h1y6.onrender.com";
+
+//const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL =
+window.location.hostname === "localhost"
+    ? "http://localhost:8080"
+    : "https://jobtracker-1-h1y6.onrender.com";
+
+   
 
 const applicationsTableBody =
     document.getElementById("applicationsTableBody");
@@ -10,126 +17,179 @@ const refreshBtn =
 const searchInput =
     document.getElementById("searchInput");
 
+const applicationCount =
+    document.getElementById("applicationCount");
+
+const applicationMessage =
+    document.getElementById("applicationMessage");
+
 let allApplications = [];
 
 const APPLICATION_STATUSES = [
     "Applied",
     "Under Review",
     "Shortlisted",
-    "Rejected",
-    "Selected"
+    "Selected",
+    "Rejected"
 ];
 
-// Get Candidate Name
-
-function getCandidateName(application) {
-    return application.candidate?.name
-        ?? application.candidateName
-        ?? "N/A";
-}
-
-// Get Job Title
-
-function getJobTitle(application) {
-    return application.job?.title
-        ?? application.jobTitle
-        ?? "N/A";
-}
-
-// Get Company Name
-
-function getCompanyName(application) {
-    return application.job?.company
-        ?? application.company
-        ?? "N/A";
-}
-
-// Escape HTML
-
 function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, character => ({
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
         "&": "&amp;",
         "<": "&lt;",
         ">": "&gt;",
         '"': "&quot;",
         "'": "&#39;"
-    })[character]);
+    })[char]);
 }
 
-// Read API Response Safely
+function getCandidateName(application) {
+    return String(
+        application.candidate?.name ??
+        application.candidateName ??
+        "N/A"
+    );
+}
+
+function getJobTitle(application) {
+    return String(
+        application.job?.title ??
+        application.jobTitle ??
+        "N/A"
+    );
+}
+
+function getCompanyName(application) {
+    return String(
+        application.job?.company ??
+        application.company ??
+        "N/A"
+    );
+}
+
+function showMessage(message, type = "success") {
+    applicationMessage.textContent = message;
+    applicationMessage.className =
+        `application-message ${type}`;
+    applicationMessage.hidden = false;
+}
+
+function clearMessage() {
+    applicationMessage.textContent = "";
+    applicationMessage.hidden = true;
+}
 
 async function readResponse(response) {
     const text = await response.text();
 
-    if (!text) {
-        return {};
-    }
+    if (!text) return {};
 
     try {
         return JSON.parse(text);
     } catch {
-        return { messagecode: text };
+        return { message: text };
     }
 }
 
-// Load Applications
+function getErrorMessage(result, fallback) {
+    return result.messagecode ||
+           result.message ||
+           result.error ||
+           fallback;
+}
 
-async function loadApplications() {
+async function apiRequest(path, options = {}) {
+    const response = await fetch(
+        `${API_BASE_URL}${path}`,
+        options
+    );
 
-    try {
-        applicationsTableBody.innerHTML =
-            `<tr><td colspan="6">Loading applications...</td></tr>`;
+    const result = await readResponse(response);
 
-        const response = await fetch(
-            `${API_BASE_URL}/job/applications`
+    if (!response.ok) {
+        throw new Error(
+            getErrorMessage(
+                result,
+                `Request failed: HTTP ${response.status}`
+            )
         );
+    }
 
-        const result = await readResponse(response);
+    return result;
+}
 
-        if (!response.ok) {
-            throw new Error(
-                result.messagecode || result.message || "Unable to load applications"
-            );
-        }
+function renderEmpty(message) {
+    applicationsTableBody.innerHTML = `
+        <tr>
+            <td colspan="6" class="empty-state">
+                ${escapeHTML(message)}
+            </td>
+        </tr>
+    `;
+}
 
-        allApplications = Array.isArray(result.data)
-            ? result.data
-            : [];
-
-        searchApplications();
-
-    } catch (error) {
-
-        console.error("Load Applications Error:", error);
-
-        applicationsTableBody.innerHTML =
-            `<tr><td colspan="6">Failed to load applications. Check console.</td></tr>`;
+function getStatusClass(status) {
+    switch (String(status).toLowerCase()) {
+        case "applied":
+            return "status-applied";
+        case "under review":
+        case "review":
+            return "status-review";
+        case "shortlisted":
+            return "status-shortlisted";
+        case "selected":
+            return "status-selected";
+        case "rejected":
+            return "status-rejected";
+        default:
+            return "";
     }
 }
 
-// Display Applications
+function updateStatusStyle(select) {
+    select.classList.remove(
+        "status-applied",
+        "status-review",
+        "status-shortlisted",
+        "status-selected",
+        "status-rejected"
+    );
+
+    const statusClass = getStatusClass(select.value);
+
+    if (statusClass) {
+        select.classList.add(statusClass);
+    }
+}
 
 function displayApplications(applications) {
-
     applicationsTableBody.innerHTML = "";
 
+    applicationCount.textContent =
+        `${applications.length} application${applications.length === 1 ? "" : "s"}`;
+
     if (applications.length === 0) {
-
-        applicationsTableBody.innerHTML =
-            `<tr><td colspan="6">No applications found.</td></tr>`;
-
+        renderEmpty("No applications found.");
         return;
     }
 
     applications.forEach(application => {
+        const id = Number(application.id);
+
+        if (!Number.isSafeInteger(id)) return;
 
         const candidateName = getCandidateName(application);
         const jobTitle = getJobTitle(application);
         const companyName = getCompanyName(application);
 
-        const currentStatus = application.status ?? "Applied";
+        const currentStatus =
+            String(application.status ?? "Applied");
 
-        const statusOptions = APPLICATION_STATUSES.map(status => `
+        const statuses = APPLICATION_STATUSES.includes(currentStatus)
+            ? APPLICATION_STATUSES
+            : [currentStatus, ...APPLICATION_STATUSES];
+
+        const options = statuses.map(status => `
             <option value="${escapeHTML(status)}"
                 ${currentStatus === status ? "selected" : ""}>
                 ${escapeHTML(status)}
@@ -139,156 +199,235 @@ function displayApplications(applications) {
         const row = document.createElement("tr");
 
         row.innerHTML = `
-            <td>${escapeHTML(application.id)}</td>
+            <td>${id}</td>
 
-            <td>${escapeHTML(candidateName)}</td>
+            <td class="candidate-name">
+                ${escapeHTML(candidateName)}
+            </td>
 
-            <td>${escapeHTML(jobTitle)}</td>
+            <td class="job-title">
+                ${escapeHTML(jobTitle)}
+            </td>
 
             <td>${escapeHTML(companyName)}</td>
 
             <td>
-                <select
-                    id="status-${Number(application.id)}"
-                    class="status-select">
-                    ${statusOptions}
+                <select class="status-select">
+                    ${options}
                 </select>
             </td>
 
             <td>
-                <button
-                    type="button"
-                    class="update-btn"
-                    onclick="updateApplicationStatus(${Number(application.id)})">
-                    Update
-                </button>
+                <div class="application-actions">
+                    <button type="button" class="update-btn">
+                        Update
+                    </button>
 
-                <button
-                    type="button"
-                    class="delete-btn"
-                    onclick="deleteApplication(${Number(application.id)})">
-                    Delete
-                </button>
+                    <button type="button" class="delete-btn">
+                        Delete
+                    </button>
+                </div>
             </td>
         `;
+
+        const statusSelect =
+            row.querySelector(".status-select");
+
+        const updateBtn =
+            row.querySelector(".update-btn");
+
+        const deleteBtn =
+            row.querySelector(".delete-btn");
+
+        updateStatusStyle(statusSelect);
+
+        statusSelect.addEventListener("change", () => {
+            updateStatusStyle(statusSelect);
+        });
+
+        updateBtn.addEventListener("click", () => {
+            updateApplicationStatus(
+                id,
+                statusSelect.value,
+                updateBtn
+            );
+        });
+
+        deleteBtn.addEventListener("click", () => {
+            deleteApplication(id, deleteBtn);
+        });
 
         applicationsTableBody.appendChild(row);
     });
 }
 
-// Update Application Status
+function searchApplications() {
+    const query = searchInput.value
+        .toLowerCase()
+        .trim();
 
-async function updateApplicationStatus(id) {
+    const filtered = allApplications.filter(application => {
+        const searchableText = [
+            application.id,
+            getCandidateName(application),
+            getJobTitle(application),
+            getCompanyName(application),
+            application.status ?? "Applied"
+        ].join(" ").toLowerCase();
 
-    const statusElement = document.getElementById(`status-${id}`);
+        return searchableText.includes(query);
+    });
 
-    if (!statusElement) {
-        alert("Status field not found.");
-        return;
-    }
+    displayApplications(filtered);
+}
 
-    const status = statusElement.value;
+async function loadApplications() {
+    refreshBtn.disabled = true;
+    refreshBtn.textContent = "Loading...";
+
+    clearMessage();
+    renderEmpty("Loading applications...");
 
     try {
+        const result = await apiRequest(
+            "/job/applications"
+        );
 
-        const response = await fetch(
-            `${API_BASE_URL}/job/application/status/${id}`,
+        if (!Array.isArray(result.data)) {
+            throw new Error(
+                "Invalid API response: expected data array."
+            );
+        }
+
+        allApplications = result.data;
+
+        searchApplications();
+
+    } catch (error) {
+        console.error("Load Applications Error:", error);
+
+        allApplications = [];
+        applicationCount.textContent = "0 applications";
+
+        renderEmpty(
+            "Failed to load applications."
+        );
+
+        showMessage(
+            `Unable to load applications: ${error.message}`,
+            "error"
+        );
+
+    } finally {
+        refreshBtn.disabled = false;
+        refreshBtn.textContent = "↻ Refresh";
+    }
+}
+
+async function updateApplicationStatus(id, status, button) {
+    button.disabled = true;
+    button.textContent = "Saving...";
+
+    clearMessage();
+
+    try {
+        const result = await apiRequest(
+            `/job/application/status/${id}`,
             {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({
-                    status: status
-                })
+                body: JSON.stringify({ status })
             }
         );
 
-        const result = await readResponse(response);
+        showMessage(
+            getErrorMessage(
+                result,
+                "Application status updated successfully."
+            ),
+            "success"
+        );
 
-        if (!response.ok) {
-            throw new Error(
-                result.messagecode || result.message || "Unable to update status"
-            );
+        const application = allApplications.find(
+            item => Number(item.id) === id
+        );
+
+        if (application) {
+            application.status = status;
         }
 
-        alert(
-            result.messagecode || "Application status updated successfully!"
-        );
-
-        await loadApplications();
+        searchApplications();
 
     } catch (error) {
-
         console.error("Update Status Error:", error);
-        alert(error.message);
-    }
-}
 
-// Search Applications
-
-function searchApplications() {
-
-    const searchValue = searchInput.value.toLowerCase().trim();
-
-    const filteredApplications = allApplications.filter(application => {
-
-        return (
-            getCandidateName(application).toLowerCase().includes(searchValue) ||
-            getJobTitle(application).toLowerCase().includes(searchValue) ||
-            getCompanyName(application).toLowerCase().includes(searchValue) ||
-            String(application.status ?? "").toLowerCase().includes(searchValue) ||
-            String(application.id ?? "").includes(searchValue)
+        showMessage(
+            `Status update failed: ${error.message}`,
+            "error"
         );
-    });
 
-    displayApplications(filteredApplications);
+        button.disabled = false;
+        button.textContent = "Update";
+    }
 }
 
-searchInput.addEventListener("input", searchApplications);
+async function deleteApplication(id, button) {
+    const confirmed = confirm(
+        `Are you sure you want to delete application #${id}?`
+    );
 
-// Delete Application
+    if (!confirmed) return;
 
-async function deleteApplication(id) {
+    button.disabled = true;
+    button.textContent = "Deleting...";
 
-    if (!confirm("Are you sure you want to delete this application?")) {
-        return;
-    }
+    clearMessage();
 
     try {
-
-        const response = await fetch(
-            `${API_BASE_URL}/job/application/${id}`,
+        const result = await apiRequest(
+            `/job/application/${id}`,
             {
                 method: "DELETE"
             }
         );
 
-        const result = await readResponse(response);
-
-        if (!response.ok) {
-            throw new Error(
-                result.messagecode || result.message || "Unable to delete application"
-            );
-        }
-
-        alert(
-            result.messagecode || "Application deleted successfully!"
+        allApplications = allApplications.filter(
+            application => Number(application.id) !== id
         );
 
-        await loadApplications();
+        searchApplications();
+
+        showMessage(
+            getErrorMessage(
+                result,
+                "Application deleted successfully."
+            ),
+            "success"
+        );
 
     } catch (error) {
-
         console.error("Delete Application Error:", error);
-        alert(error.message);
+
+        showMessage(
+            `Delete failed: ${error.message}`,
+            "error"
+        );
+
+        button.disabled = false;
+        button.textContent = "Delete";
     }
 }
 
-// Refresh Applications
+searchInput.addEventListener(
+    "input",
+    searchApplications
+);
 
-refreshBtn.addEventListener("click", loadApplications);
+refreshBtn.addEventListener(
+    "click",
+    loadApplications
+);
 
-// Initial Load
-
-document.addEventListener("DOMContentLoaded", loadApplications);
+loadApplications();

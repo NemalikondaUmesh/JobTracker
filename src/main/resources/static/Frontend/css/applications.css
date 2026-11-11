@@ -1,124 +1,125 @@
 
-/* ==========================================
-   JOBTRACKER - APPLICATIONS PAGE
-   Compact White, Slate & Purple Theme
-========================================== */
-
-/* Main Layout */
+/* Applications Page */
 
 .container {
     width: 92%;
     max-width: 1400px;
-    margin: 25px auto;
+    margin: 28px auto;
     box-sizing: border-box;
 }
 
 .page-heading {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .page-heading h1 {
+    margin: 0 0 6px;
     color: #252b3b;
-    font-size: 24px;
+    font-size: 25px;
     font-weight: 700;
-    margin: 0 0 5px;
 }
 
 .page-heading p {
+    margin: 0;
     color: #858b9c;
     font-size: 13px;
-    margin: 0;
 }
 
-/* Applications Section */
+/* Main Section */
 
 .applications-list-section {
     background: #ffffff;
-    padding: 20px 22px;
+    padding: 22px;
     border: 1px solid #e9eaf0;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(30, 35, 60, 0.035);
-    box-sizing: border-box;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(30, 35, 60, 0.045);
 }
 
 /* Section Header */
 
 .applications-list-section .section-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     gap: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .applications-list-section .section-header h2 {
+    margin: 0 0 5px;
     color: #292e40;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 650;
-    margin: 0 0 4px;
 }
 
 .applications-list-section .section-header p {
+    margin: 0;
     color: #858b9c;
     font-size: 13px;
-    margin: 0;
 }
 
-/* Refresh Button */
+/* Refresh */
 
 .applications-list-section .refresh-btn {
-    padding: 8px 13px;
+    padding: 9px 15px;
     background: #f1efff;
     color: #6555c5;
     border: 1px solid #e5e0ff;
-    border-radius: 6px;
+    border-radius: 7px;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s ease;
     white-space: nowrap;
 }
 
 .applications-list-section .refresh-btn:hover {
-    background: #e8e4ff;
-    border-color: #d4ccff;
+    background: #e6e2ff;
 }
 
-/* Search Box */
+.applications-list-section .refresh-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Toolbar */
+
+.applications-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 17px;
+}
 
 .applications-list-section .search-box {
     display: flex;
     align-items: center;
     gap: 9px;
-    width: 360px;
+    width: 390px;
     max-width: 100%;
-    height: 38px;
-    margin: 12px 0 16px;
+    height: 40px;
     padding: 0 12px;
     background: #ffffff;
     border: 1px solid #e2e5ec;
     border-radius: 7px;
     box-sizing: border-box;
-    transition: 0.2s ease;
 }
 
 .applications-list-section .search-box:focus-within {
     border-color: #7465d8;
-    box-shadow: 0 0 0 2px rgba(116, 101, 216, 0.08);
+    box-shadow: 0 0 0 3px rgba(116, 101, 216, 0.09);
 }
 
 .applications-list-section .search-icon {
     color: #858ba0;
-    font-size: 19px;
-    line-height: 1;
+    font-size: 20px;
 }
 
 .applications-list-section .search-box input {
     flex: 1;
     min-width: 0;
     width: 100%;
-    height: 100%;
-    padding: 0;
     border: none;
     outline: none;
     background: transparent;
@@ -131,30 +132,59 @@
     color: #a0a5b3;
 }
 
-/* Table Container */
+.application-count {
+    color: #777e91;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Feedback */
+
+.application-message {
+    margin-bottom: 15px;
+    padding: 11px 13px;
+    border-radius: 7px;
+    font-size: 13px;
+}
+
+.application-message[hidden] {
+    display: none;
+}
+
+.application-message.success {
+    background: #ecfdf3;
+    color: #167347;
+    border: 1px solid #bbebce;
+}
+
+.application-message.error {
+    background: #fff1f1;
+    color: #b42332;
+    border: 1px solid #ffd4d4;
+}
+
+/* Table */
 
 .applications-list-section .table-container {
     width: 100%;
     overflow-x: auto;
     border: 1px solid #e9eaf0;
-    border-radius: 8px;
+    border-radius: 9px;
 }
 
 .applications-list-section table {
     width: 100%;
-    min-width: 800px;
+    min-width: 850px;
     border-collapse: collapse;
     background: #ffffff;
 }
-
-/* Table Header */
 
 .applications-list-section thead {
     background: #f6f5fb;
 }
 
 .applications-list-section th {
-    padding: 13px;
+    padding: 14px 13px;
     color: #51576b;
     font-size: 12px;
     font-weight: 650;
@@ -163,10 +193,8 @@
     white-space: nowrap;
 }
 
-/* Table Body */
-
 .applications-list-section td {
-    padding: 12px 13px;
+    padding: 13px;
     color: #50576a;
     font-size: 12px;
     border-bottom: 1px solid #f0f1f5;
@@ -181,15 +209,28 @@
     border-bottom: none;
 }
 
-/* Status Select */
+.applications-list-section .empty-state {
+    padding: 30px;
+    text-align: center;
+    color: #858b9c;
+    font-size: 13px;
+}
+
+.candidate-name,
+.job-title {
+    color: #303548;
+    font-weight: 600;
+}
+
+/* Status Dropdown */
 
 .applications-list-section .status-select {
-    min-width: 125px;
-    padding: 7px 9px;
+    min-width: 135px;
+    padding: 8px 10px;
     background: #ffffff;
     color: #444b60;
     border: 1px solid #e0e3eb;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 12px;
     font-family: inherit;
     outline: none;
@@ -201,18 +242,47 @@
     box-shadow: 0 0 0 2px rgba(116, 101, 216, 0.08);
 }
 
-/* Update and Delete Buttons */
+.status-applied {
+    background: #eff6ff !important;
+    color: #2563eb !important;
+}
+
+.status-review {
+    background: #fff8e6 !important;
+    color: #a66a00 !important;
+}
+
+.status-shortlisted {
+    background: #f2edff !important;
+    color: #6941c6 !important;
+}
+
+.status-selected {
+    background: #ecfdf3 !important;
+    color: #16834d !important;
+}
+
+.status-rejected {
+    background: #fff1f1 !important;
+    color: #d92d20 !important;
+}
+
+/* Action Buttons */
+
+.application-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
 
 .applications-list-section .update-btn,
 .applications-list-section .delete-btn {
-    padding: 7px 11px;
-    margin-right: 5px;
+    padding: 8px 12px;
     border: none;
-    border-radius: 5px;
-    font-size: 11px;
+    border-radius: 6px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s ease;
     white-space: nowrap;
 }
 
@@ -223,7 +293,6 @@
 
 .applications-list-section .update-btn:hover {
     background: #dedbff;
-    transform: translateY(-1px);
 }
 
 .applications-list-section .delete-btn {
@@ -233,26 +302,29 @@
 
 .applications-list-section .delete-btn:hover {
     background: #ffe0e0;
-    transform: translateY(-1px);
+}
+
+.applications-list-section button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 /* Footer */
 
-footer {
-    padding: 18px 0;
+.footer {
+    padding: 20px 0;
     text-align: center;
 }
 
-footer p {
+.footer p {
+    margin: 0;
     color: #969bab;
     font-size: 12px;
-    margin: 0;
 }
 
-/* Responsive Design */
+/* Responsive */
 
 @media (max-width: 768px) {
-
     .container {
         width: 95%;
     }
@@ -265,15 +337,18 @@ footer p {
         flex-wrap: wrap;
     }
 
+    .applications-toolbar {
+        align-items: stretch;
+    }
+
     .applications-list-section .search-box {
         width: 100%;
     }
 }
 
 @media (max-width: 480px) {
-
     .page-heading h1 {
-        font-size: 20px;
+        font-size: 21px;
     }
 
     .applications-list-section .section-header {
@@ -281,6 +356,88 @@ footer p {
     }
 
     .applications-list-section .refresh-btn {
-        padding: 7px 10px;
+        padding: 8px 11px;
     }
+}
+
+/* Match Candidates Page Theme */
+
+/* Page Background */
+body {
+    background: #f5f6fa;
+}
+
+/* Header */
+.header {
+    background: #ffffff;
+    border-bottom: 1px solid #e9eaf0;
+}
+
+.header .logo h2 {
+    color: #292e40;
+}
+
+.header .logo p {
+    color: #858b9c;
+}
+
+.header .back-link {
+    color: #6859ca;
+}
+
+/* Main Section */
+.applications-list-section {
+    background: #ffffff;
+    border: 1px solid #e9eaf0;
+    box-shadow: 0 2px 8px rgba(30, 35, 60, 0.035);
+}
+
+/* Table Header */
+.applications-list-section thead {
+    background: #f6f5fb;
+}
+
+/* Refresh Button */
+.applications-list-section .refresh-btn {
+    background: #f1efff;
+    color: #6555c5;
+    border: 1px solid #e5e0ff;
+}
+
+.applications-list-section .refresh-btn:hover {
+    background: #e8e4ff;
+}
+
+/* Status Dropdown */
+.applications-list-section .status-select:focus {
+    border-color: #7465d8;
+}
+
+/* Update Button */
+.applications-list-section .update-btn {
+    background: #eeedff;
+    color: #6254c5;
+}
+
+.applications-list-section .update-btn:hover {
+    background: #dedbff;
+}
+
+/* Delete Button */
+.applications-list-section .delete-btn {
+    background: #fff0f0;
+    color: #dc5353;
+}
+
+/* Search Focus */
+.applications-list-section .search-box:focus-within {
+    border-color: #7465d8;
+    box-shadow: 0 0 0 2px rgba(116, 101, 216, 0.08);
+}
+.header .logo h2 {
+    color: #292e40;
+}
+
+.header .logo h2::first-letter {
+    color: #292e40;
 }

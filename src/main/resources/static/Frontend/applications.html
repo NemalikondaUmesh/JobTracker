@@ -1,17 +1,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Job Applications | JobTracker</title>
+    <title>Manage Applications | JobTracker</title>
 
     <link rel="stylesheet" href="./CSS/style.css">
     <link rel="stylesheet" href="./CSS/applications.css">
 </head>
-
 <body>
 
     <header class="header">
@@ -19,7 +16,6 @@
             <h2>J JobTracker</h2>
             <p>Career Management Platform</p>
         </div>
-
         <a href="index.html" class="back-link">← Dashboard</a>
     </header>
 
@@ -27,36 +23,42 @@
 
         <section class="page-heading">
             <h1>Manage Job Applications</h1>
-            <p>View and manage candidate job applications.</p>
+            <p>View applications, update their status, and manage records.</p>
         </section>
 
         <section class="applications-list-section">
 
             <div class="section-header">
-
                 <div>
                     <h2>All Applications</h2>
-                    <p>View application details and manage their status.</p>
+                    <p>Manage candidate applications and hiring progress.</p>
                 </div>
 
                 <button type="button" id="refreshBtn" class="refresh-btn">
                     ↻ Refresh
                 </button>
-
             </div>
 
-            <div class="search-box">
-                <span class="search-icon">⌕</span>
+            <div class="applications-toolbar">
+                <div class="search-box">
+                    <span class="search-icon">⌕</span>
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search candidate, job, company or status..."
+                        autocomplete="off"
+                    >
+                </div>
 
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="Search by candidate, job, company or status..."
-                    autocomplete="off">
+                <span id="applicationCount" class="application-count">
+                    0 applications
+                </span>
             </div>
+
+            <div id="applicationMessage" class="application-message"
+                 role="status" aria-live="polite" hidden></div>
 
             <div class="table-container">
-
                 <table>
                     <thead>
                         <tr>
@@ -71,15 +73,15 @@
 
                     <tbody id="applicationsTableBody">
                         <tr>
-                            <td colspan="6">Loading applications...</td>
+                            <td colspan="6" class="empty-state">
+                                Loading applications...
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-
             </div>
 
         </section>
-
     </main>
 
     <footer class="footer">
@@ -87,6 +89,5 @@
     </footer>
 
     <script src="./Js/applications.js"></script>
-
 </body>
 </html>

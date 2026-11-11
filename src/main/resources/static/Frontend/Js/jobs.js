@@ -1,6 +1,10 @@
 
 // API Base URL
-const API_BASE_URL = "https://jobtracker-1-h1y6.onrender.com";
+
+const API_BASE_URL =
+window.location.hostname === "localhost"
+    ? "http://localhost:8080"
+    : "https://jobtracker-1-h1y6.onrender.com";
 
 // HTML Elements
 const jobForm = document.getElementById("jobForm");
@@ -25,27 +29,39 @@ const cancelApplyBtn = document.getElementById("cancelApplyBtn");
 let allJobs = [];
 
 // Load all jobs
+
 async function loadJobs() {
     try {
-        jobsTableBody.innerHTML = `
-            <tr><td colspan="8">Loading jobs...</td></tr>
-        `;
+        jobsTableBody.innerHTML =
+            '<tr><td colspan="8">Loading jobs...</td></tr>';
 
         const response = await fetch(`${API_BASE_URL}/job/all`);
 
         if (!response.ok) {
-            throw new Error("Unable to load jobs");
+            throw new Error(`HTTP Error: ${response.status}`);
         }
 
         const result = await response.json();
-        allJobs = result.data || [];
+
+        console.log("Jobs API Response:", result);
+
+        if (!Array.isArray(result.data)) {
+            throw new Error("API response data is not an array");
+        }
+
+        allJobs = result.data;
 
         searchJobs();
 
     } catch (error) {
-        console.error("Load Jobs Error:", error);
+        console.error("Actual Jobs Loading Error:", error);
+
         jobsTableBody.innerHTML = `
-            <tr><td colspan="8">Failed to load jobs.</td></tr>
+            <tr>
+                <td colspan="8">
+                    ${escapeHTML(error.message)}
+                </td>
+            </tr>
         `;
     }
 }

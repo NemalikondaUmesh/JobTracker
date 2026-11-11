@@ -3,9 +3,17 @@
 // JOBTRACKER - CANDIDATES MANAGEMENT
 // ==========================================
 
-const API_BASE_URL = "https://jobtracker-1-h1y6.onrender.com";
+// API Base URL
+//const API_BASE_URL = "http://localhost:8080";
 
-// DOM Elements
+const API_BASE_URL =
+window.location.hostname === "localhost"
+    ? "http://localhost:8080"
+    : "https://jobtracker-1-h1y6.onrender.com";
+// ==========================================
+// DOM ELEMENTS
+// ==========================================
+
 const candidateForm = document.getElementById("candidateForm");
 const candidatesTableBody = document.getElementById("candidatesTableBody");
 const formMessage = document.getElementById("formMessage");
@@ -15,41 +23,59 @@ const searchInput = document.getElementById("searchInput");
 
 let allCandidates = [];
 
+
 // ==========================================
 // LOAD ALL CANDIDATES
 // ==========================================
 
 async function loadCandidates() {
-    try {
-        candidatesTableBody.innerHTML =
-            `<tr><td colspan="6">Loading candidates...</td></tr>`;
 
-        const response = await fetch(`${API_BASE_URL}/candidate/all`);
+    try {
+
+        candidatesTableBody.innerHTML =
+            '<tr><td colspan="6">Loading candidates...</td></tr>';
+
+        const response = await fetch(
+            `${API_BASE_URL}/candidate/all`
+        );
 
         if (!response.ok) {
-            throw new Error("Unable to load candidates");
+            throw new Error(`HTTP Error: ${response.status}`);
         }
 
         const result = await response.json();
 
-        allCandidates = result.data || [];
+        console.log("Candidates API Response:", result);
 
-        // Preserve the current search
+        if (!Array.isArray(result.data)) {
+            throw new Error("Invalid candidates API response");
+        }
+
+        allCandidates = result.data;
+
         searchCandidates();
 
     } catch (error) {
-        console.error("Load Candidates Error:", error);
 
-        candidatesTableBody.innerHTML =
-            `<tr><td colspan="6">Failed to load candidates. Check console.</td></tr>`;
+        console.error("Actual Candidates Loading Error:", error);
+
+        candidatesTableBody.innerHTML = `
+            <tr>
+                <td colspan="6">
+                    ${escapeHTML(error.message)}
+                </td>
+            </tr>
+        `;
     }
 }
+
 
 // ==========================================
 // ESCAPE HTML
 // ==========================================
 
 function escapeHTML(value) {
+
     return String(value ?? "").replace(/[&<>"']/g, character => ({
         "&": "&amp;",
         "<": "&lt;",
@@ -57,7 +83,9 @@ function escapeHTML(value) {
         '"': "&quot;",
         "'": "&#39;"
     })[character]);
+
 }
+
 
 // ==========================================
 // DISPLAY CANDIDATES
@@ -67,9 +95,14 @@ function displayCandidates(candidates) {
 
     candidatesTableBody.innerHTML = "";
 
-    if (candidates.length === 0) {
-        candidatesTableBody.innerHTML =
-            `<tr><td colspan="6">No candidates found.</td></tr>`;
+    if (!candidates || candidates.length === 0) {
+
+        candidatesTableBody.innerHTML = `
+            <tr>
+                <td colspan="6">No candidates found.</td>
+            </tr>
+        `;
+
         return;
     }
 
@@ -79,13 +112,9 @@ function displayCandidates(candidates) {
 
         row.innerHTML = `
             <td>${escapeHTML(candidate.id)}</td>
-
             <td>${escapeHTML(candidate.name)}</td>
-
             <td>${escapeHTML(candidate.email)}</td>
-
             <td>${escapeHTML(candidate.phone)}</td>
-
             <td>${escapeHTML(candidate.skills)}</td>
 
             <td>
@@ -106,8 +135,11 @@ function displayCandidates(candidates) {
         `;
 
         candidatesTableBody.appendChild(row);
+
     });
+
 }
+
 
 // ==========================================
 // REGISTER OR UPDATE CANDIDATE
@@ -120,33 +152,57 @@ candidateForm.addEventListener("submit", async function(event) {
     const id = document.getElementById("candidateId").value;
 
     const candidateData = {
+
         name: document.getElementById("name").value.trim(),
+
         email: document.getElementById("email").value.trim(),
+
         phone: document.getElementById("phone").value.trim(),
+
         skills: document.getElementById("skills").value.trim()
+
     };
 
     try {
 
         const response = await fetch(
+
             id
                 ? `${API_BASE_URL}/candidate/update/${id}`
                 : `${API_BASE_URL}/candidate/register`,
+
             {
                 method: id ? "PUT" : "POST",
+
                 headers: {
                     "Content-Type": "application/json"
                 },
+
                 body: JSON.stringify(candidateData)
             }
+
         );
 
-        const result = await response.json();
+        const responseText = await response.text();
+
+        let result = {};
+
+        if (responseText) {
+            try {
+                result = JSON.parse(responseText);
+            } catch {
+                result = {};
+            }
+        }
 
         if (!response.ok) {
+
             throw new Error(
-                result.messagecode || result.message || "Candidate operation failed"
+                result.messagecode ||
+                result.message ||
+                `Candidate operation failed: HTTP ${response.status}`
             );
+
         }
 
         const successMessage = id
@@ -154,6 +210,7 @@ candidateForm.addEventListener("submit", async function(event) {
             : "Candidate registered successfully!";
 
         resetForm();
+
         showMessage(successMessage, "success");
 
         await loadCandidates();
@@ -161,9 +218,13 @@ candidateForm.addEventListener("submit", async function(event) {
     } catch (error) {
 
         console.error("Save Candidate Error:", error);
+
         showMessage(error.message, "error");
+
     }
+
 });
+
 
 // ==========================================
 // EDIT CANDIDATE
@@ -173,13 +234,16 @@ async function editCandidate(id) {
 
     try {
 
-        const response = await fetch(`${API_BASE_URL}/candidate/${id}`);
+        const response = await fetch(
+            `${API_BASE_URL}/candidate/${id}`
+        );
 
         if (!response.ok) {
-            throw new Error("Candidate not found");
+            throw new Error(`Unable to find candidate. HTTP ${response.status}`);
         }
 
         const result = await response.json();
+
         const candidate = result.data;
 
         if (!candidate) {
@@ -187,16 +251,27 @@ async function editCandidate(id) {
         }
 
         document.getElementById("candidateId").value = candidate.id;
-        document.getElementById("name").value = candidate.name ?? "";
-        document.getElementById("email").value = candidate.email ?? "";
-        document.getElementById("phone").value = candidate.phone ?? "";
-        document.getElementById("skills").value = candidate.skills ?? "";
+
+        document.getElementById("name").value =
+            candidate.name ?? "";
+
+        document.getElementById("email").value =
+            candidate.email ?? "";
+
+        document.getElementById("phone").value =
+            candidate.phone ?? "";
+
+        document.getElementById("skills").value =
+            candidate.skills ?? "";
 
         document.getElementById("formTitle").textContent =
             "Update Candidate";
 
         submitBtn.textContent = "Update Candidate";
+
         cancelBtn.hidden = false;
+
+        formMessage.textContent = "";
 
         window.scrollTo({
             top: 0,
@@ -206,9 +281,13 @@ async function editCandidate(id) {
     } catch (error) {
 
         console.error("Edit Candidate Error:", error);
+
         alert(error.message);
+
     }
+
 }
+
 
 // ==========================================
 // DELETE CANDIDATE
@@ -216,7 +295,11 @@ async function editCandidate(id) {
 
 async function deleteCandidate(id) {
 
-    if (!confirm("Are you sure you want to delete this candidate?")) {
+    const confirmed = confirm(
+        "Are you sure you want to delete this candidate?"
+    );
+
+    if (!confirmed) {
         return;
     }
 
@@ -229,21 +312,43 @@ async function deleteCandidate(id) {
             }
         );
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText || "Unable to delete candidate");
+        const responseText = await response.text();
+
+        let result = {};
+
+        if (responseText) {
+            try {
+                result = JSON.parse(responseText);
+            } catch {
+                result = {};
+            }
         }
 
-        alert("Candidate deleted successfully!");
+        if (!response.ok) {
+
+            throw new Error(
+                result.messagecode ||
+                `Unable to delete candidate. HTTP ${response.status}`
+            );
+
+        }
+
+        alert(
+            result.messagecode || "Candidate deleted successfully!"
+        );
 
         await loadCandidates();
 
     } catch (error) {
 
         console.error("Delete Candidate Error:", error);
+
         alert(error.message);
+
     }
+
 }
+
 
 // ==========================================
 // SEARCH CANDIDATES
@@ -251,21 +356,29 @@ async function deleteCandidate(id) {
 
 function searchCandidates() {
 
-    const searchValue = searchInput.value.toLowerCase().trim();
+    const searchValue = searchInput.value
+        .trim()
+        .toLowerCase();
 
     const filteredCandidates = allCandidates.filter(candidate => {
 
         const name = String(candidate.name ?? "").toLowerCase();
+
         const email = String(candidate.email ?? "").toLowerCase();
 
         return name.includes(searchValue) ||
                email.includes(searchValue);
+
     });
 
     displayCandidates(filteredCandidates);
+
 }
 
+
+// Search listener
 searchInput.addEventListener("input", searchCandidates);
+
 
 // ==========================================
 // RESET FORM
@@ -283,7 +396,9 @@ function resetForm() {
     submitBtn.textContent = "Register Candidate";
 
     cancelBtn.hidden = true;
+
 }
+
 
 // ==========================================
 // SUCCESS / ERROR MESSAGE
@@ -295,7 +410,9 @@ function showMessage(message, type) {
 
     formMessage.style.color =
         type === "success" ? "#16a36a" : "#dc3545";
+
 }
+
 
 // ==========================================
 // CANCEL EDIT
@@ -304,8 +421,11 @@ function showMessage(message, type) {
 cancelBtn.addEventListener("click", function() {
 
     resetForm();
+
     formMessage.textContent = "";
+
 });
+
 
 // ==========================================
 // INITIAL LOAD
