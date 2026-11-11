@@ -143,6 +143,25 @@ http://localhost:8080/Frontend/index.html
 | PUT | `/job/application/status/{id}` | Update application status |
 | DELETE | `/job/application/{id}` | Delete application |
 
+
+## 📸 Application Screenshots
+
+### 1. Dashboard
+![JobTracker Dashboard](Dashboard.png)
+
+### 2. Dashboard Statistics
+![Dashboard Statistics](Dashboard2.png)
+
+### 3. Jobs Management
+![Jobs Management](Manage%20Jobs.png)
+
+### 4. Applications Management
+![Applications Management](Manage%20Applications.png)
+
+### 5. Candidate Registration
+![Candidate Registration](Candidate%20Register.png)
+
+
 ## 🌐 Deployment
 
 - **Frontend:** Vercel
