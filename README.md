@@ -153,7 +153,7 @@ http://localhost:8080/Frontend/index.html
 ![Dashboard Statistics](Dashboard2.png)
 
 ### 3. Jobs Management
-![Jobs Management](Manage%20Jobs.png)
+![Jobs Management](ManagingJobs.png)
 
 ### 4. Applications Management
 ![Applications Management](Manage%20Applications.png)
