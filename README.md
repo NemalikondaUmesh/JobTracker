@@ -1,5 +1,14 @@
 # 🚀 JobTracker – Career Management Platform
 
+![Java](https://img.shields.io/badge/Java-17-orange?logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.1-brightgreen?logo=springboot)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue?logo=postgresql)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript)
+![HTML5](https://img.shields.io/badge/HTML5-Frontend-orange?logo=html5)
+![CSS3](https://img.shields.io/badge/CSS3-Styling-blue?logo=css3)
+![Deployment](https://img.shields.io/badge/Frontend-Vercel-black?logo=vercel)
+
+
 A full-stack web application designed to manage job opportunities, candidate information, and job applications in one place.
 
 🔗 **Live Website:** https://jobtracker-mu-eosin.vercel.app/  
